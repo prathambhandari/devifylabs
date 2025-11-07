@@ -1,0 +1,757 @@
+:root {
+  /* Dark mode tokens */
+  --bg: #000000; /* page background */
+  --panel: #0c0c0c; /* panels / cards */
+  --panel-2: rgb(8, 8, 8); /* subtle overlay */
+  --fg: #e6eef8; /* primary text */
+  --muted: #9aa4b2; /* muted text */
+  --accent: rgba(255, 255, 255, 0.06); /* subtle button fill */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 64rem;
+  /* leave room for floating header */
+  padding: 7.5rem 2rem 2rem;
+}
+
+/* Hero / main content */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* keep left alignment */
+  justify-content: center; /* center vertically within the row */
+  gap: 1.6rem; /* slightly larger vertical rhythm */
+  padding: 5rem 1.4rem; /* more breathing room */
+  background: transparent;
+}
+.tagline {
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
+.hero-title {
+  font-size: 2.6rem;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 56rem;
+}
+.hero-lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 56rem;
+  margin: 0;
+}
+.hero-ctas {
+  display: flex;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+}
+.btn {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.9rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.btn.primary {
+  /* dark-mode primary: subtle light fill on dark background */
+  background: var(--accent);
+  color: var(--fg);
+  border-color: rgba(255, 255, 255, 0.08);
+  padding: 0.95rem 1.4rem;
+}
+.btn.ghost {
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  .hero {
+    padding: 2.5rem 0.8rem;
+  }
+  .tagline {
+    font-size: 0.95rem;
+  }
+  .hero-lead {
+    font-size: 0.95rem;
+  }
+  .btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+  .btn.primary {
+    padding: 0.75rem 1.05rem;
+  }
+}
+
+/* Two-column layout: hero text left, code preview/card right */
+.hero-row {
+  display: grid;
+  /* Increase preview column so code is more visible, but cap it so it doesn't overflow the page */
+  grid-template-columns: 1fr minmax(320px, 52%);
+  gap: 3rem; /* wider gap between text and preview */
+  align-items: center; /* vertically center columns */
+  /* Make the hero row take most of the viewport so centering is visible */
+  min-height: calc(100vh - 9.5rem);
+}
+
+/* offset anchor jumps so fixed header doesn't cover content */
+.hero-row {
+  scroll-margin-top: 7.5rem;
+}
+.preview-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.card.small {
+  max-width: 560px;
+  width: 100%;
+  padding: 0.6rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Floating header styles */
+.site-header {
+  position: fixed;
+  top: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel-2); /* subtle panel overlay */
+  color: var(--fg);
+  border-radius: 12px; /* slightly rounded squared */
+  padding: 0.7rem 1.2rem;
+  z-index: 1000;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  min-width: 420px;
+  max-width: 1100px;
+}
+.site-header .header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 420px;
+  max-width: 1000px;
+}
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--fg);
+}
+.brand-muted {
+  font-weight: 300;
+  margin-left: 5px;
+  opacity: 0.9;
+  color: var(--muted);
+}
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+.site-nav a {
+  color: var(--fg);
+  text-decoration: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.site-nav a:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.nav-cta {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 0.95rem;
+}
+
+/* Showcase card */
+.showcase {
+  margin-top: 2.4rem;
+  display: flex;
+  gap: 1rem;
+}
+.card {
+  display: flex;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 1.1rem;
+  border-radius: 12px;
+  gap: 1rem;
+  align-items: flex-start;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.card-left {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.card-icon {
+  font-family: monospace;
+  font-size: 1.25rem;
+  opacity: 0.95;
+}
+.card-body {
+  flex: 1;
+}
+.card-title {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.05rem;
+}
+.card-desc {
+  margin: 0 0 0.6rem 0;
+  color: var(--muted);
+}
+.card-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.chip {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--fg);
+}
+.card-cta {
+  margin-left: auto;
+  color: var(--fg);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 720px) {
+  .card {
+    flex-direction: row;
+    padding: 0.9rem;
+  }
+  .card-left {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* On smaller screens, stack the hero row into a single column so layout
+     preserves visual hierarchy while keeping the same design language */
+  .hero-row {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    min-height: auto;
+    align-items: start;
+  }
+
+  /* Ensure the textual hero appears before the preview on narrow screens */
+  .hero {
+    order: 1;
+    padding: 2.5rem 0.8rem;
+  }
+  .preview-column {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 0.6rem;
+  }
+
+  /* Allow the preview card to fill the available width on small screens */
+  .card.small {
+    max-width: 100%;
+  }
+
+  /* Scale down hero heading a bit to preserve rhythm */
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  /* Reduce code preview max-height so it doesn't dominate the viewport */
+  .code-preview .code {
+    max-height: 20rem;
+  }
+}
+
+/* Services section */
+.services-section {
+  margin-top: 3.2rem;
+  padding: 1.2rem 0;
+  /* occupy full viewport height */
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Ensure sections that scroll internally also use smooth behavior */
+.services-section,
+.our-work-section,
+.process-section,
+.about-section,
+.code-preview .code {
+  scroll-behavior: smooth;
+}
+.section-title {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  color: var(--fg);
+}
+.services-intro {
+  color: var(--muted);
+  margin: 0 0 1.25rem 0;
+  max-width: 70ch;
+}
+
+/* Our Work / Projects */
+.our-work-section {
+  margin-top: 3rem;
+  padding: 1.2rem 0;
+  /* occupy full viewport height like the services section */
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.project-card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.project-media {
+  height: 140px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+.project-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.project-title {
+  margin: 0;
+  font-size: 1rem;
+}
+.project-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.project-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+.project-tags .tag {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.service-card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1.2rem;
+  border-radius: 12px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.service-card .card-title {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.05rem;
+}
+.service-card .card-desc {
+  margin: 0 0 0.8rem 0;
+  color: var(--muted);
+}
+.card-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.card-bullets .bullet {
+  color: var(--fg);
+  opacity: 0.95;
+}
+.card-cta-row {
+  margin-top: auto;
+}
+.btn.small {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.95rem;
+}
+.service-card .arrow {
+  margin-left: 0.4rem;
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Code preview styles */
+.code-preview {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0.6rem 0 0.8rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.45);
+}
+.code-preview .gutter {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.6rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+.code-preview .ln {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.78rem;
+  line-height: 1.35rem;
+}
+.code-preview .code {
+  padding: 0.45rem 0.7rem;
+  /* limit height to fit the card and allow scrolling when content is long */
+  overflow: auto;
+  max-height: 30rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
+    "Segoe UI Mono", monospace;
+  font-size: 0.9rem;
+  color: #e6eef8;
+  /* wrap long lines so code is visible without overflowing to the right */
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.35rem;
+}
+.code-preview .code:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Hide scrollbar while preserving layout (for browsers that would show one) */
+.code-preview,
+.code-preview .code,
+.code-preview .gutter {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.code-preview .code::-webkit-scrollbar,
+.code-preview .gutter::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .code-preview .code {
+    font-size: 0.85rem;
+  }
+  .code-preview .gutter {
+    padding: 0.45rem 0.35rem;
+  }
+}
+
+/* small responsive tweaks */
+@media (max-width: 540px) {
+  .site-header {
+    left: 0.6rem;
+    transform: none;
+    right: 0.6rem;
+  }
+  .site-header .header-inner {
+    min-width: 0;
+  }
+  .site-nav a {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.45rem;
+  }
+}
+
+/* Process / path-like steps */
+.process-section {
+  margin-top: 3rem;
+  padding: 1.2rem 0;
+  box-sizing: border-box;
+}
+
+/* make process section full viewport height like services and our-work */
+.process-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
+
+.process-steps {
+  position: relative;
+  padding: 2rem 0; /* vertical padding for first/last markers */
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+/* center the vertical line */
+.process-steps::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0.8rem;
+  bottom: 0.8rem;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1px;
+}
+
+/* each step occupies full width; content sits to the left or right of the center line */
+.process-step {
+  position: relative;
+  width: 100%;
+  padding: 0.25rem 0;
+}
+
+.step-marker {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  font-weight: 700;
+  font-size: 0.85rem;
+  z-index: 2;
+}
+
+/* content column width (half the container minus space for the marker/line) */
+.step-body {
+  width: calc(50% - 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* odd steps on the left, right-aligned content */
+.process-step:nth-child(odd) .step-body {
+  margin-right: auto;
+  text-align: right;
+  padding-right: 1.4rem;
+}
+
+/* even steps on the right, left-aligned content */
+.process-step:nth-child(even) .step-body {
+  margin-left: auto;
+  text-align: left;
+  padding-left: 1.4rem;
+}
+
+.step-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.step-desc {
+  margin: 0;
+  color: var(--muted);
+  max-width: 70ch;
+}
+.step-duration {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* Responsive: collapse to single column on narrow screens */
+@media (max-width: 900px) {
+  .process-steps {
+    padding-left: 3rem;
+  }
+  .process-steps::before {
+    left: 1.2rem;
+    transform: none;
+  }
+  .step-marker {
+    left: 1.2rem;
+    transform: none;
+    width: 22px;
+    height: 22px;
+  }
+  .step-body {
+    width: 100%;
+    margin: 0 0 0 2.6rem;
+    text-align: left;
+    padding: 0;
+  }
+}
+
+/* About / Team */
+.about-section {
+  margin-top: 5rem;
+  padding: 1.2rem 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  justify-content: flex-start;
+  align-items: center; /* center horizontally */
+  text-align: center; /* center text within the section */
+}
+/* make about section full viewport height like services and our-work */
+.about-section {
+  min-height: 100vh;
+  overflow: auto;
+}
+
+/* offset anchor jumps so fixed header doesn't cover About */
+.about-section {
+  scroll-margin-top: 0rem;
+}
+.about-title {
+  font-size: 1.6rem;
+  margin: 8rem 0 0.25rem 0;
+}
+.about-desc {
+  margin: 0 0 1rem 0;
+  color: var(--muted);
+  max-width: 70ch;
+}
+.team {
+  margin-top: 1rem;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+.team-card {
+  /* Vertical layout for About team cards only: avatar above name/role */
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+  border-radius: 10px;
+}
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+  font-size: 1rem;
+}
+.team-name {
+  font-weight: 700;
+}
+.team-role {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
