@@ -71,21 +71,48 @@ export default app
             <ServiceCard
               title="Web Development"
               description={`High-converting websites that drive sales and engagement. From landing pages to e-commerce platforms. We focus on conversion optimization, analytics integration and maintainable frontend architecture.`}
-              bullets={["Responsive Design", "SEO Optimized", "Fast Loading"]}
+              bullets={[
+                "Responsive & Mobile-First Design",
+                "SEO Optimization",
+                "Analytics Integration",
+                "Fast Loading ",
+                "Performance Tuning",
+                "CMS Integration ",
+                "Conversion-Focused UX/UI",
+                "Ongoing Maintenance & Support",
+              ]}
               cta="Get Quote"
             />
 
             <ServiceCard
               title="Web Applications"
               description={`Custom web apps that streamline operations and boost productivity. Built for scale and performance. We design APIs, robust data models and resilient deployment pipelines.`}
-              bullets={["Cloud-Based", "Secure", "Scalable"]}
+              bullets={[
+                "Cloud-Based Deployment",
+                "Secure Authentication",
+                " Role Management",
+                "RESTful & GraphQL API",
+                "Database Design ",
+                "Real-Time Feature",
+                "Scalable Infrastructure ",
+                "CI/CD Pipeline",
+              ]}
               cta="Get Quote"
             />
 
             <ServiceCard
               title="Mobile Apps"
               description={`Native and cross-platform mobile solutions that engage users and drive business growth. We prioritize performance, accessibility and smooth update cycles.`}
-              bullets={["iOS & Android", "User-Friendly", "App Store Ready"]}
+              bullets={[
+                "Cross-Platform React Native ",
+                "API Integration & Cloud Sync",
+                "Push Notifications ",
+                "Analytics Tracking",
+                "Offline Support",
+                " Data Caching",
+                "UI/UX Design ",
+                "App Store & Play Store  Assistance",
+              ]}
               cta="Get Quote"
             />
           </div>
